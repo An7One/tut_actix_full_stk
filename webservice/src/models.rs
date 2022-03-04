@@ -20,4 +20,3 @@ impl From<web::Json<Course>> for Course {
         }
     }
 }
-
