@@ -9,8 +9,16 @@ default-run = "teacher-service"
 [dependencies]
 actix-web = "4.0.1"
 actix-rt = "2.6.0"
-serde = { version = "1.0.132", features = ["derive"]}
 chrono = { version = "0.4.19", features = ["serde"]}
+dotenv = "0.15.0"
+openssl = {version = "0.10.38", features = ["vendored"]}
+serde = { version = "1.0.132", features = ["derive"]}
+sqlx = {version = "0.5.10", default_features = false, features = [
+    "chrono",
+    "postgres",
+    "runtime-tokio-rustls",
+    "macros",
+]}
 
 [[bin]]
 name = "server1"
