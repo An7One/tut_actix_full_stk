@@ -1,5 +1,6 @@
 use actix_web::{web, App, HttpServer};
 use dotenv::dotenv;
+use errors::MyError;
 use sqlx::postgres::PgPoolOptions;
 use std::env;
 use std::io;
@@ -34,8 +35,12 @@ async fn main() -> io::Result<()> {
     let app = move || {
         App::new()
             .app_data(shared_data.clone())
-            .configure(general_routes)
-            .configure(course_routers)
+            .app_data(web::JsonConfig::default().error_handler(|_err, _req| {
+                MyError::InvalidInput("Please provide valid JSON input".to_owned()).into()
+            }))
+            .configure(routes_general)
+            .configure(routes_course)
+            .configure(routes_teacher)
     };
     HttpServer::new(app).bind("127.0.0.1:3000")?.run().await
 }
