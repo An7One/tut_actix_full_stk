@@ -98,7 +98,7 @@ pub async fn update_one_teacher_detail_db(
     };
     let updated_row = sqlx::query!(
         r#"
-        UPDATE teacher SET name = $1, url_picture=$2, profile=$3 WHERE id = $4
+        UPDATE teacher SET name = $1, url_picture = $2, profile = $3 WHERE id = $4
         RETURNING id, name, url_picture, profile
         "#,
         tmp.name,

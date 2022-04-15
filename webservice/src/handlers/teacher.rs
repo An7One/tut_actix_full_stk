@@ -121,6 +121,6 @@ mod test {
         });
         let params: web::Path<i32> = web::Path::from(1);
         let resp = delete_one_teacher(app_state, params).await.unwrap();
-        assert_eq!(resp.status, StatusCode::OK);
+        assert_eq!(resp.status(), StatusCode::OK);
     }
 }
